@@ -20,8 +20,19 @@ export class HomeComponent implements OnInit {
   }
 
   private displayFeaturedPizzas(): void {
+    let pizzas: Pizza[] = this.pizzaService.getPizzas();
     let featuredPizzas: Pizza[] = this.pizzaService.getFeaturedPizzas();
-    this.firstPromotion = featuredPizzas[0];
-    this.secondPromotion = featuredPizzas[1];
+    if (featuredPizzas.length >= 2) {
+      this.firstPromotion = featuredPizzas[0];
+      this.secondPromotion = featuredPizzas[1];
+    } else {
+      if (featuredPizzas.length == 1) {
+        this.firstPromotion = featuredPizzas[0];
+        this.secondPromotion = pizzas[1];
+      } else {
+        this.firstPromotion = pizzas[0];
+        this.secondPromotion = pizzas[1];
+      }
+    }
   }
 }
